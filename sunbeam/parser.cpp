@@ -1,6 +1,7 @@
 #include <opm/json/JsonObject.hpp>
 #include <opm/parser/eclipse/Parser/Parser.hpp>
 #include <opm/parser/eclipse/Deck/Deck.hpp>
+#include <opm/parser/eclipse/EclipseState/Schedule/Schedule.hpp>
 
 #include "sunbeam.hpp"
 
@@ -26,14 +27,24 @@ namespace {
 
     void (ParseContext::*ctx_update)(const std::string&, InputError::Action) = &ParseContext::update;
 
+
+
+    Schedule parse_scheduleX(const std::string& deck_file, const Opm::EclipseState& es, const Opm::ParseContext& pc) {
+        Parser p;
+        Deck deck = p.parseFile(deck_file, pc);
+        return Schedule(deck, es, pc);
+    }
+
+    Schedule (*parse_schedule)(const std::string&, const EclipseState&, const ParseContext& ) = &parse_scheduleX;
 }
+
 
 void sunbeam::export_Parser() {
 
     py::def( "parse", parse );
     py::def( "parse_data", parseData );
     py::def( "parse_deck", &parseDeck );
-
+    py::def( "parse_schedule", parse_schedule);
     py::class_< ParseContext >( "ParseContext" )
         .def( "update", ctx_update )
         ;

@@ -114,3 +114,8 @@ def parse_deck(deck, keywords=[], recovery=[]):
                            # string representation of the the deck.
     pc = _parse_context(recovery) if recovery else lib.ParseContext()
     return lib.parse_deck(deck, keywords, is_file, pc)
+
+
+def parse_schedule(input_deck, es):
+    pc = lib.ParseContext()
+    return lib.parse_schedule(input_deck, es, pc)
