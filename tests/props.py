@@ -9,13 +9,18 @@ class TestProps(unittest.TestCase):
         self.assertTrue(diff <= epsilon, msg=err_msg)
 
     def setUp(self):
+        print "Starting setup"
         self.spe3 = sunbeam.parse('spe3/SPE3CASE1.DATA')
+        print "EclipseState created"
         self.props = self.spe3.props()
+        print "Have accessed propes"
+        self.grid = self.spe3.grid()
+        print "Returnning from setUp\n\n"
 
-    def test_repr(self):
+    def xtest_repr(self):
         self.assertTrue('Eclipse3DProperties' in repr(self.props))
 
-    def test_contains(self):
+    def xtest_contains(self):
         p = self.props
         self.assertTrue('PORO'  in p)
         self.assertFalse('NONO' in p)
@@ -24,19 +29,21 @@ class TestProps(unittest.TestCase):
     def test_getitem(self):
         p = self.props
         poro = p['PORO']
+        print self.grid
         self.assertEqual(324, len(poro))
         self.assertEqual(0.13, poro[0])
         self.assertTrue( 'PERMX' in p )
+        print self.grid
         px = p['PERMX']
         print(len(px))
         self.assertEqual(324, len(px))
 
-    def test_regions(self):
+    def xtest_regions(self):
         p = self.props
         reg = p.getRegions('SATNUM')
         self.assertEqual(1, len(reg)) # auto generated
 
-    def test_permx_values(self):
+    def xtest_permx_values(self):
         def md2si(md):
             """millidarcy->SI"""
             return md * 1e-3 * 9.869233e-13
@@ -54,7 +61,7 @@ class TestProps(unittest.TestCase):
                     darcy = darcys[k]
                     self.assertClose(darcy, perm)
 
-    def test_volume(self):
+    def xtest_volume(self):
         e3dp  = self.props
         grid  = self.spe3.grid()
         for i in range(grid.getNX()):

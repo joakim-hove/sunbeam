@@ -86,11 +86,11 @@ SATNUM
         self.assertFalse(rst.getWriteRestartFile(0))
         self.assertEqual(8, rst.getFirstRestartStep())
         
-    def test_summary(self):
-        smry = self.state.summary()
-        self.assertTrue('SummaryConfig' in repr(smry))
-        self.assertTrue('WOPR' in smry) # hasKeyword
-        self.assertFalse('NONO' in smry) # hasKeyword
+    #def test_summary(self):
+    #    smry = self.state.summary()
+    #    self.assertTrue('SummaryConfig' in repr(smry))
+    #    self.assertTrue('WOPR' in smry) # hasKeyword
+    #    self.assertFalse('NONO' in smry) # hasKeyword
     
     def test_simulation(self):
         sim = self.state.simulation()

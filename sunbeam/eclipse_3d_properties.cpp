@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <opm/parser/eclipse/EclipseState/Eclipse3DProperties.hpp>
 
 #include "sunbeam.hpp"
@@ -10,9 +12,16 @@ namespace {
         if (ip.supportsKeyword(kw) && ip.hasKeyword(kw))
             return iterable_to_pylist(p.getIntGridProperty(kw).getData());
 
+
+        std::cout << "Looking for " << kw << std::endl;
         const auto& dp = p.getDoubleProperties();
-        if (dp.supportsKeyword(kw) && dp.hasKeyword(kw))
-            return iterable_to_pylist(p.getDoubleGridProperty(kw).getData());
+        std::cout << "dp returned" << std::endl;
+        if (dp.supportsKeyword(kw) && dp.hasKeyword(kw)) {
+          std::cout << "Starting to construct list" << std::endl;
+          const auto& prop = p.getDoubleGridProperty(kw);
+          std::cout << "have get Property" << std::endl;
+          return iterable_to_pylist(p.getDoubleGridProperty(kw).getData());
+        }
         throw key_error( "no such grid property " + kw );
     }
 

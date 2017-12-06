@@ -21,6 +21,10 @@ namespace {
         return isFile ? p.parseFile(deckStr, pc) : p.parseString(deckStr, pc);
     }
 
+    EclipseState parseState(const std::string& input_file, const ParseContext& context) {
+        return Parser::parse(input_file, context);
+    }
+
     EclipseState (*parse)( const std::string&, const ParseContext& ) = &Parser::parse;
     EclipseState (*parseData) (const std::string &data, const ParseContext& context) = &Parser::parseData;
 
@@ -30,7 +34,7 @@ namespace {
 
 void sunbeam::export_Parser() {
 
-    py::def( "parse", parse );
+    py::def( "parse", &parseState );
     py::def( "parse_data", parseData );
     py::def( "parse_deck", &parseDeck );
 
