@@ -4,7 +4,8 @@ import json
 
 from sunbeam import libsunbeam as lib
 from .properties import EclipseState
-
+from .schedule import Schedule
+from .config import SummaryConfig
 
 def _parse_context(recovery):
     ctx = lib.ParseContext()
@@ -116,3 +117,17 @@ def parse_deck(deck, keywords=[], recovery=[]):
                            # string representation of the the deck.
     pc = _parse_context(recovery) if recovery else lib.ParseContext()
     return lib.parse_deck(deck, keywords, is_file, pc)
+
+
+
+def create_schedule(filename, recovery=[]):
+    if recovery:
+        pc = _parse_context(recovery)
+    else:
+        pc = lib.ParseContext()
+
+    return Schedule(lib.create_schedule(filename, pc))
+
+
+def create_smry_config(filename):
+    return SummaryConfig(lib.create_smry_config(filename))

@@ -49,6 +49,7 @@ SATNUM
 
     @classmethod
     def setUpClass(cls):
+        cls.smry_config = sunbeam.create_smry_config("spe3/SPE3CASE1.DATA")
         cls.spe3 = sunbeam.parse('spe3/SPE3CASE1.DATA')
         cls.cpa = sunbeam.parse('data/CORNERPOINT_ACTNUM.DATA')
         cls.state = cls.spe3
@@ -87,7 +88,7 @@ SATNUM
         self.assertEqual(7, rst.getFirstRestartStep())
 
     def test_summary(self):
-        smry = self.state.summary()
+        smry = self.smry_config
         self.assertTrue('SummaryConfig' in repr(smry))
         self.assertTrue('WOPR' in smry) # hasKeyword
         self.assertFalse('NONO' in smry) # hasKeyword

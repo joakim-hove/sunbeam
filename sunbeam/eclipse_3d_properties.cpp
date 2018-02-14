@@ -37,7 +37,7 @@ namespace {
 
 void sunbeam::export_Eclipse3DProperties(py::module& module) {
 
-  py::class_< Eclipse3DProperties >( module, "Eclipse3DProperties") 
+  py::class_< Eclipse3DProperties >( module, "Eclipse3DProperties")
     .def( "getRegions",   &regions )
     .def( "__contains__", &contains )
     .def( "__getitem__",  &getitem )

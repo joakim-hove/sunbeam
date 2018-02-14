@@ -11,10 +11,6 @@ class EclipseState(object):
     def __repr__(self):
         return 'EclipseState(title = "%s")' % self.title
 
-    @property
-    def schedule(self):
-        return Schedule(self._schedule())
-
     def props(self):
         return Eclipse3DProperties(self._props())
 
