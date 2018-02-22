@@ -7,7 +7,7 @@ class TestSchedule(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.sch = sunbeam.create_schedule('spe3/SPE3CASE1.DATA')
+        cls.sch = sunbeam.parse('spe3/SPE3CASE1.DATA').schedule
 
     def testWells(self):
         self.assertEqual(2, len(self.sch.wells))

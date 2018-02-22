@@ -5,7 +5,7 @@ class TestWells(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.sch = sunbeam.create_schedule('spe3/SPE3CASE1.DATA')
+        cls.sch = sunbeam.parse('spe3/SPE3CASE1.DATA').schedule
         cls.timesteps = cls.sch.timesteps
         cls.wells = cls.sch.wells
 

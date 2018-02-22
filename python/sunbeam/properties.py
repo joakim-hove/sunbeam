@@ -99,3 +99,26 @@ class EclipseGrid(object):
         if na != g:
             cnt += ', active = %s' % na
         return 'EclipseGrid(%s)' % cnt
+
+
+@delegate(lib.SunbeamState)
+class SunbeamState(object):
+
+    @property
+    def state(self):
+        return EclipseState(self._state())
+
+
+    @property
+    def schedule(self):
+        return Schedule(self._schedule())
+
+
+    @property
+    def deck(self):
+        return self._deck()
+
+    @property
+    def summary_config(self):
+        return self._summary_config()
+
