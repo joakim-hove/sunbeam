@@ -36,12 +36,13 @@ install:
   - git clone https://github.com/OPM/opm-common.git
   - mkdir libecl/build
   - pushd libecl/build
+  - git checkout master
   - cmake -DENABLE_PYTHON=OFF -DBUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$INSTALL_ROOT ..
   - make install
   - popd
   - mkdir opm-common/build
   - pushd opm-common/build
-  - git checkout release/sunbeam/2018.09
+  - git checkout master
   - cmake .. -DCMAKE_PREFIX_PATH=$INSTALL_ROOT
              -DCMAKE_INSTALL_PREFIX=$INSTALL_ROOT
              -DBUILD_TESTING=OFF
